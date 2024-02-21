@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
+
+  nextjs:
+    container_name: nextjs
+    build: 
+      context: .
+      dockerfile: ./nextjs/Dockerfile # Dockerfileのパスを指定
+    volumes:
+      - ./next-app:/app
+    environment:
+      - WATCHPACK_POLLING=true
+    command: sh -c "cd /app && npm run dev"
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootps
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userps
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    restart: always
+    
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: user
+      PMA_PASSWORD: userps
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
