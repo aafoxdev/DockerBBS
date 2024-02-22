@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* モバイルビュー用のハンバーガーメニュースタイル */
+.hamburger-menu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: block;
+  }
+
+  .menu-items {
+    display: none;
+    width: 100%; /* メニューの幅を親要素いっぱいにする */
+    padding: 0; /* 必要に応じてパディングを調整 */
+  }
+
+  .menu-items.active {
+    display: block;
+  }
+
+  .menu-items li a {
+    display: block; /* リンクをブロック要素として扱う */
+    width: 100%; /* リンクの幅を親要素いっぱいにする */
+    padding: 10px 0; /* タップしやすいようにパディングを追加 */
+    text-align: center; /* テキストを中央揃えにする */
+  }
+}
