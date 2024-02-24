@@ -10,12 +10,13 @@ export default async function Home() {
 
   return (
     <>
+    <FormEdit />
       {datas.map((b, i) => (
         <LinkDataDetails data={b} index={i + 1} key={b.id} />
       )
       )
       }
-      <FormEdit />
+      
     </>
   );
 }

@@ -88,3 +88,17 @@ docker logs nextjs
 ```ruby:qiita.rb
 docker exec -it nextjs /bin/bash
 ```
+ヘッダーでlocalhost8000のリクエストを3000として許可する設定
+```ruby:qiita.rb
+nano next.config.mjs
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+experimental: {
+    serverActions: {
+      allowedOrigins: ["localhost:8080", "localhost:3000"]
+    }
+  }
+};
+
+export default nextConfig;
+```

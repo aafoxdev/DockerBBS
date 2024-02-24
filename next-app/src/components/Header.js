@@ -16,17 +16,19 @@ export default function Header() {
   };
 
   return (
-    <header className="py-6 px-4 flex justify-between items-center">
+    <header className="py-6 px-4 flex justify-between items-center ">
+      <div className="fixed top-4 left-4 z-50">
       <Link href="/" onClick={handleMenuClose}>
 
         <Image src={logo} width={100} height={100} alt="Tailwind CSS" />
 
       </Link>
+      </div>
 
       <nav
         className={
           isOpen
-            ? "z-40 bg-blue-100 fixed top-0 right-0 bottom-0 left-0 h-screen flex flex-col"
+            ? "z-40 bg-blue-100 fixed top-2 right-0 bottom-0 left-0 h-screen flex flex-col"
             : "fixed right-[-100%] md:right-4"
         }
       >
