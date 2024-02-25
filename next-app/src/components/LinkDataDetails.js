@@ -2,10 +2,8 @@
 import Link from 'next/link';
 import DataDetails from './DataDetails';
 import { removeData } from '../lib/actions';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 
-export default function LinkedDataDetails({ index, data }) {
+export default function LinkedDataDetails({ index, data, showDeleteButton = true }) {
     const handleSubmit = async (event) => {
         event.preventDefault(); // フォーム送信のデフォルト動作を阻止
         await removeData(data); // removeData 関数を非同期で呼び出す
@@ -19,12 +17,14 @@ export default function LinkedDataDetails({ index, data }) {
                     <DataDetails index={index} data={data} />
                 </div>
             </Link>
-            <form onSubmit={handleSubmit}>
-                <button type="submit"
-                        className="bg-red-600 text-white rounded px-4 py-2 hover:bg-red-500">
-                    削除
-                </button>
-            </form>
+            {showDeleteButton && (
+              <form onSubmit={handleSubmit}>
+                  <button type="submit"
+                          className="bg-red-600 text-white rounded px-4 py-2 hover:bg-red-500">
+                      削除
+                  </button>
+              </form>
+            )}
         </>
     );
 }
