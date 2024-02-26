@@ -1,5 +1,6 @@
 // app/page.js
 import { getAllDatas } from '@/lib/getter';
+//import { getAllDatas, getAllRakutenData } from '@/lib/getter';
 import FormEdit from '@/components/FormEdit';
 import FormSearch from '@/components/FormSearch';
 import LinkDataDetails from '@/components/LinkDataDetails';

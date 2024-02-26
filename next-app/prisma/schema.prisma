@@ -24,3 +24,10 @@ model reviews {
   publisher String
   memo String
 }
+
+model RecipeCategory {
+  id          Int     @id @default(autoincrement())
+  categoryId  String  @unique
+  categoryName String
+  categoryUrl String
+}
