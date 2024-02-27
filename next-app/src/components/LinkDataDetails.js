@@ -11,19 +11,24 @@ export default function LinkedDataDetails({ index, data, showDeleteButton = true
     };
 
     return (
-        <>
-            <Link href={`/edit/${data.id}`}>
-                <div className="hover:bg-green-100">
+        <><div className="hover:bg-green-100">
+            <a
+                href={`/edit/${data.categoryId}?recipeTitle=${encodeURIComponent(data.recipeTitle)}`}
+                rel="noopener noreferrer"
+                
+            >
+                <div>
                     <DataDetails index={index} data={data} />
                 </div>
-            </Link>
+            </a>
+            </div>
             {showDeleteButton && (
-              <form onSubmit={handleSubmit}>
-                  <button type="submit"
-                          className="bg-red-600 text-white rounded px-4 py-2 hover:bg-red-500">
-                      削除
-                  </button>
-              </form>
+                <form onSubmit={handleSubmit}>
+                    <button type="submit"
+                        className="bg-red-600 text-white rounded px-4 py-2 hover:bg-red-500">
+                        削除
+                    </button>
+                </form>
             )}
         </>
     );

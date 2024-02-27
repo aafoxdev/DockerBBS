@@ -31,3 +31,12 @@ model RecipeCategory {
   categoryName String
   categoryUrl String
 }
+
+model RegistDatas {
+  id  Int  @id @default(autoincrement())
+  name  String
+  categoryId  String
+  cookdate  DateTime  @default(now())
+  foodmemo  String
+  afterlog  String
+}
