@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 export default function DataDetails({ index, data }) {
+  const cookDateString = data.cookdate ? new Date(data.cookdate).toISOString().split('T')[0] : '';
   return (
     <div className="flex w-full mb-4">
       <div className="flex-none" style={{ width: '140px', height: '180px', position: 'relative' }}>
@@ -19,6 +20,7 @@ export default function DataDetails({ index, data }) {
         <p>{data.recipeIndication}</p>
         <p>{data.recipeCost}</p>
         <p>{data.recipeDescription}</p>
+
       </div>
     </div>
   );

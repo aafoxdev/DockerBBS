@@ -34,9 +34,10 @@ model RecipeCategory {
 
 model RegistDatas {
   id  Int  @id @default(autoincrement())
-  name  String
+  recipeTitle  String  @unique
   categoryId  String
   cookdate  DateTime  @default(now())
   foodmemo  String
   afterlog  String
+  foodImageUrl String
 }

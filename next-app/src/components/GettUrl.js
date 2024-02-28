@@ -5,6 +5,8 @@ const GetUrl = () => {
   // URLのパラメーターを取得
   const searchParams = useSearchParams();
   const name = searchParams.get("recipeTitle");
+  const foodImageUrl = searchParams.get("foodImageUrl");
+  
   console.log(name);
 
   // URLのパスを取得
@@ -16,7 +18,7 @@ const GetUrl = () => {
   console.log(params.categoryId);
 
   // パラメーターを配列にまとめて返す
-  const urlParamsArray = [name, params.categoryId];
+  const urlParamsArray = [name, params.categoryId, foodImageUrl];
 
   return urlParamsArray;
 }

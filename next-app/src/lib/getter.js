@@ -2,7 +2,18 @@ import prisma from './prisma';
 import DataDetails from '@/components/DataDetails';
 
 export async function getAllDatas() {
-  return await prisma.reviews.findMany({
+  return await prisma.RegistDatas.findMany({
+    orderBy: {
+      id: 'desc'
+    }
+  });
+}
+
+export async function getDatasByTitle(name) {
+  return await prisma.RegistDatas.findMany({
+    where: {
+      recipeTitle: name // recipeTitleが引数で受け取ったnameと完全一致するレコードを検索
+    },
     orderBy: {
       id: 'desc'
     }
@@ -57,7 +68,7 @@ export async function getMenulistByKeyword(menucategorys) {
   // 各カテゴリIDに対するランキング情報を順次取得
   for (const category of menucategorys) {
     if (counter >= 2) break;
-    await delay(100); // 楽天APIのレート制限に対応するために1秒間待機
+    await delay(700); // 楽天APIのレート制限に対応するために1秒間待機
     // categoryUrlから親子関係を持ったカテゴリID部分を抽出
     const match = category.categoryUrl.match(/(\d+)-(\d+)-(\d+)/);
     const categoryIdPart = match ? `${match[1]}-${match[2]}-${match[3]}` : '';
@@ -156,7 +167,7 @@ export async function GetSelectMenulistByKeyword({ name, categoryid }) {
       };
 
       // 結果をコンソールに出力（デバッグ用）
-      console.log(result);
+      //console.log(result);
 
       // 関数からの戻り値としてレシピ情報を返す
       return (

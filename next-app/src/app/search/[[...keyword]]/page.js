@@ -12,7 +12,7 @@ export default async function SearchResult({ params: { keyword = 'React' } }) {
   return (
     <>
       {menudatas.map((b, i) => (
-        <LinkedDataDetails data={b} index={i + 1} key={b.id} showDeleteButton={false} />
+        <LinkedDataDetails data={b} index={i + 1} key={b.id} showsearchlist={true} />
       ))}
     </>
   );

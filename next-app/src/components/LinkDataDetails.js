@@ -1,9 +1,11 @@
 "use client"
 import Link from 'next/link';
 import DataDetails from './DataDetails';
+import DataHomeDetails from './DataHomeDetails';
 import { removeData } from '../lib/actions';
 
-export default function LinkedDataDetails({ index, data, showDeleteButton = true }) {
+export default function LinkedDataDetails({ index, data, showhomelist, showsearchlist }) {
+
     const handleSubmit = async (event) => {
         event.preventDefault(); // フォーム送信のデフォルト動作を阻止
         await removeData(data); // removeData 関数を非同期で呼び出す
@@ -13,23 +15,32 @@ export default function LinkedDataDetails({ index, data, showDeleteButton = true
     return (
         <><div className="hover:bg-green-100">
             <a
-                href={`/edit/${data.categoryId}?recipeTitle=${encodeURIComponent(data.recipeTitle)}`}
+                href={`/edit/${data.categoryId}?recipeTitle=${encodeURIComponent(data.recipeTitle)}&foodImageUrl=${data.foodImageUrl}`}
                 rel="noopener noreferrer"
-                
+
             >
                 <div>
-                    <DataDetails index={index} data={data} />
+                    {showsearchlist && (
+                        <>
+                            <DataDetails index={index} data={data} />
+                        </>
+                    )}
+                    {showhomelist && (
+                        <>
+                            <DataHomeDetails index={index} data={data} />
+                        </>
+                    )}
                 </div>
             </a>
-            </div>
-            {showDeleteButton && (
+        </div>
+            {/*showDeleteButton && (
                 <form onSubmit={handleSubmit}>
                     <button type="submit"
                         className="bg-red-600 text-white rounded px-4 py-2 hover:bg-red-500">
                         削除
                     </button>
                 </form>
-            )}
+            )*/}
         </>
     );
 }
