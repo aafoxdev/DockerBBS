@@ -122,7 +122,7 @@ export async function getMenulistByKeyword(menucategorys) {
 }
 
 require('dotenv').config();
-export async function GetSelectMenulistByKeyword({ name, categoryid }) {
+export async function GetSelectMenulistByKeyword({ name, categoryid,  }) {
   const apiKey = process.env.API_KEY;
 
   // API制限対策のための遅延関数
@@ -172,7 +172,7 @@ export async function GetSelectMenulistByKeyword({ name, categoryid }) {
       // 関数からの戻り値としてレシピ情報を返す
       return (
         <>
-          <DataDetails index={0} data={result} />
+          <DataDetails index={0} data={result} showdetail={true}/>
         </>
       );
     } else {
