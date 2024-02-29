@@ -1,6 +1,6 @@
 'use server';
 import { redirect } from 'next/navigation';
-import prisma  from './prisma';
+import prisma from './prisma';
 
 //export async function addData(data) {
 //  const input = {
@@ -22,13 +22,18 @@ import prisma  from './prisma';
 
 export async function addData(data) {
   const cookdate = data.get('cookdate') + 'T00:00:00.000Z';
+  const encodedUrl = data.get('foodImageUrl');
+  // 'https%3A/' を 'https://' に直接置換
+  const correctedUrl = encodedUrl.replace('https%3A/', 'https://');
+
+  console.log(correctedUrl); // 置換後のURLが出力される
   const input = {
     recipeTitle: data.get('name'),
     categoryId: data.get('categoryid'),
     cookdate: cookdate,
     foodmemo: data.get('foodmemo'),
     afterlog: data.get('afterlog'),
-    foodImageUrl: data.get('foodImageUrl'),
+    foodImageUrl: correctedUrl,
   }
   console.log('データの取得をしました');
   console.log(input);
@@ -51,13 +56,40 @@ export async function addData(data) {
   redirect('/');
 }
 
-export async function removeData(data){
-  //console.log(data)
-  //console.log('確認しました')
-  await prisma.reviews.delete({
-    where: {
-      id: data.id
+export async function removeData(formData) {
+  // FormDataからレシピのタイトルを直接取得
+  const recipeTitle = formData.get('name');
+  let flag = 0;
+
+  try {
+    // レシピのタイトルに一致するレコードが存在するか先に確認
+    const existingRecord = await prisma.RegistDatas.findFirst({
+      where: {
+        recipeTitle: recipeTitle,
+      },
+    });
+
+    // レコードが存在する場合のみ削除を実行
+    if (existingRecord) {
+      await prisma.RegistDatas.delete({
+        where: {
+          recipeTitle: recipeTitle,
+        },
+      });
+      console.log(`Deleted record where recipe title is '${recipeTitle}'`);
+      flag = 1;
+    } else {
+      // レコードが存在しない場合、ここで処理を終了
+      console.log(`No record found with recipe title '${recipeTitle}'. No action taken.`);
     }
-  });
-  redirect('/');
+
+    // サーバーサイドで実行される場合、リダイレクトはレスポンスを使って行う
+    // クライアントサイドのリダイレクトが必要な場合は、適切な方法を選択してください
+  } catch (error) {
+    console.error("Failed to delete the data:", error);
+    // 適切なエラーハンドリングをここで行う
+  }
+  if (flag==1){
+    redirect('/');
+  }
 }

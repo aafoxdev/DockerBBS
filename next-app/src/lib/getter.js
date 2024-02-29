@@ -67,7 +67,7 @@ export async function getMenulistByKeyword(menucategorys) {
   let counter = 0;
   // 各カテゴリIDに対するランキング情報を順次取得
   for (const category of menucategorys) {
-    if (counter >= 2) break;
+    if (counter >= 3) break;
     await delay(700); // 楽天APIのレート制限に対応するために1秒間待機
     // categoryUrlから親子関係を持ったカテゴリID部分を抽出
     const match = category.categoryUrl.match(/(\d+)-(\d+)-(\d+)/);

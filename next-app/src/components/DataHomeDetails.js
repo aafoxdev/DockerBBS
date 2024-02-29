@@ -19,7 +19,7 @@ export default function DataHomeDetails({ index, data, showhomeitem = false }) {
                 <h3 className="text-lg font-bold">{data.recipeTitle}</h3>
                 <p>{cookDateString}</p>
                 <h3 className="text-base font-bold">料理の感想</h3>
-                <p>{data.foodmemo}</p>
+                <p>{data.afterlog}</p>
             </div>
         </div>
     );

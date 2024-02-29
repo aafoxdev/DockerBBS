@@ -14,8 +14,10 @@ export default function LinkedDataDetails({ index, data, showhomelist, showsearc
 
     return (
         <><div className="hover:bg-green-100">
-            <a
-                href={`/edit/${data.categoryId}?recipeTitle=${encodeURIComponent(data.recipeTitle)}&foodImageUrl=${data.foodImageUrl}`}
+            {/*<a
+                //href={`/edit/${data.categoryId}?recipeTitle=${encodeURIComponent(data.recipeTitle)}&foodImageUrl=${data.foodImageUrl}`}
+                href={`/edit/${data.categoryId}/${encodeURIComponent(data.recipeTitle)}/${data.foodImageUrl}`}
+                
                 rel="noopener noreferrer"
 
             >
@@ -31,7 +33,26 @@ export default function LinkedDataDetails({ index, data, showhomelist, showsearc
                         </>
                     )}
                 </div>
-            </a>
+                    </a>*/}
+            <Link
+                href={`/edit/${data.categoryId}/${encodeURIComponent(data.recipeTitle)}/${data.foodImageUrl}`}
+                passHref
+            >
+          
+                    <div>
+                        {showsearchlist && (
+                            <>
+                                <DataDetails index={index} data={data} />
+                            </>
+                        )}
+                        {showhomelist && (
+                            <>
+                                <DataHomeDetails index={index} data={data} />
+                            </>
+                        )}
+                    </div>
+              
+            </Link>
         </div>
             {/*showDeleteButton && (
                 <form onSubmit={handleSubmit}>
