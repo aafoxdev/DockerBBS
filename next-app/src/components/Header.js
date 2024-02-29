@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import logo from '@/img/DockerBBS.png'
+import Container from '@/components/Container'
 
 
 export default function Header() {
@@ -16,6 +17,8 @@ export default function Header() {
   };
 
   return (
+    <>
+    <Container>
     <header className="py-6 px-4 flex justify-between items-center ">
       <div className="fixed top-4 left-4 z-50">
       <Link href="/" onClick={handleMenuClose}>
@@ -78,5 +81,7 @@ export default function Header() {
         />
       </button>
     </header>
+    </Container>
+    </>
   );
 }

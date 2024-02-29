@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { GetSelectMenulistByKeyword, getDatasByTitle } from '@/lib/getter';
 import FormRegist from "@/components/FormRegist"
+import FormSearch from '@/components/FormSearch';
 
 export default async function Page({ params }) {
   // params.slugsを元に、categoryId, recipeTitle, foodImageUrlを含む配列を作成
@@ -32,6 +33,7 @@ export default async function Page({ params }) {
 
   return (
     <div>
+      <FormSearch />
       <GetSelectMenulistByKeyword name={name} categoryid={categoryId} />
       <hr />
       <FormRegist src={{ name: name, categoryid: categoryId, cookdate: cookdate, foodImageUrl: foodImageUrl, foodmemo: getdata[0]?.foodmemo, afterlog: getdata[0]?.afterlog }} />
